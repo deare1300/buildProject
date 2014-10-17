@@ -1,6 +1,9 @@
 #!/bin/sh
 
 PWD=` pwd `
+
+echo "$PWD"
+
 MKDIR=mkdir
 TOUCH=touch
 
@@ -23,15 +26,15 @@ project=$1
 if [  -e $project ];
 then
 	echo "$project exist **";
-	exit -2
+	#exit -2
+else
+	MKDIR $project
 fi
 
 
-$MKDIR $project
-cd $project && $TOUCH  $MAKEFILE && $MKDIR $SRC $INCLUDE $BIN $OBJ || echo
-"error mkdir or touch makefile**" && exit -3
+$TOUCH  $project/$MAKEFILE && $MKDIR $project/$SRC $project/$INCLUDE $project/$BIN $project/$OBJ
 
-cd $PWD
 
-cat $MAKEFILE >> $project/$MAKFILE
+echo "$PWD"
+cat ${PWD}/${MAKEFILE} > ${project}/${MAKEFILE}
 
